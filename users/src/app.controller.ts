@@ -6,14 +6,15 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  // @Get()
-  // getHello(): string {
-  //   return this.appService.getHello();
-  // }
-
   @MessagePattern('users.findAll')
   findeAll(@Payload() pl: any){
     console.log('Pl', pl);
     return this.appService.findAll();
+  }
+
+  @MessagePattern('users.bridgeToBooks')
+  bridgeToBooks(@Payload() pl: any){
+    console.log('bridgeToBooks Pl', pl);
+    return this.appService.bridgeToBooks();
   }
 }

@@ -1,23 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { CreateBookDto } from './dto/create-book.dto';
+import { UpdateBookDto } from './dto/update-book.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
-export class AppService {
+export class BooksService {
   constructor(@Inject('BOOKS_CLIENT') private booksClient: ClientProxy) {}
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   findAll() {
-    const users = [{ user: 'User1' }, { user: 'User2' }];
-    return users;
-  }
-
-  bridgeToBooks() {
     const res$ = this.booksClient.send('books.findAll', {
-      ddd: 'USERS bridgeToBooks from USERS',
+      ddd: 'BOOKS findAll',
     });
     return lastValueFrom(res$);
   }

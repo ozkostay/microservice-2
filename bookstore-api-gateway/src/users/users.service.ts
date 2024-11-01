@@ -13,7 +13,15 @@ export class UsersService {
   // }
 
   findAll() {
-    const res$ = this.usersClient.send('users.findAll', { ddd: '123'});
+    const res$ = this.usersClient.send('users.findAll', { ddd: 'findAll' });
+    return lastValueFrom(res$);
+    // return `MOCK This action returns all users`;
+  }
+
+  bridgeToBooks() {
+    const res$ = this.usersClient.send('users.bridgeToBooks', {
+      ddd: 'bridgeToBooks',
+    });
     return lastValueFrom(res$);
     // return `MOCK This action returns all users`;
   }
